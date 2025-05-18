@@ -33,9 +33,9 @@ class ClassHospede
     }
 
 
-    function setIdUsuario($idHospede)
+    function setIdHospede($idHospede)
     {
-        $this->idUsuario = $idHospede;
+        $this->idHospede = $idHospede;
     }
 
     function setNome($nome)
@@ -48,12 +48,12 @@ class ClassHospede
         $this->email = $email;
     }
 
-    function setTelefone()
+    function setTelefone($telefone)
     {
         $this->telefone = $telefone;
     }
 
-    function setDataNascimento()
+    function setDataNascimento($dataNascimento)
     {
         $this->dataNascimento = $dataNascimento;
     }

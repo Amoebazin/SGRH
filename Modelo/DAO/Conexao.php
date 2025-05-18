@@ -4,7 +4,7 @@ abstract class Conexao
 {
     public static function getInstance()
     {
-        $dsn = 'mysql:host=localhost;bd_pdo_sgrh';
+        $dsn = 'mysql:host=localhost;dbname=bd_pdo_sgrh';
         $user = 'root';
         $pass = '';
         try {

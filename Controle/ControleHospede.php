@@ -1,33 +1,37 @@
 <?php
+var_dump($_GET);
 
 require_once '../Modelo/ClassHospede.php';
 require_once '../Modelo/DAO/ClassHospedeDAO.php';
 
 $acao = $_GET['ACAO'];
+$tipo = @$_POST['tipo'];
 
-$idHospede = @$_POST['idH'];
+$idHospede = @$_POST['idHospede'];
 $nome = @$_POST['nome'];
 $email = @$_POST['email'];
 $telefone = @$_POST['telefone'];
 $dataNascimento = @$_POST['data_nascimento'];
 
 $novoHospede = new ClassHospede();
-$novoHospede->setIdHospede($id);
+$novoHospede->setIdHospede($idHospede);
 $novoHospede->setNome($nome);
 $novoHospede->setEmail($email);
 $novoHospede->setTelefone($telefone);
 $novoHospede->setDataNascimento($dataNascimento);
 
-$classHoespedeDAO = new ClassHospedeDAO();
+
+$classHospedeDAO = new ClassHospedeDAO();
 
 switch ($acao) {
     case 'cadastrarHospede':
-        $hospede = $$classHospedeDAO->cadastrar($novoHospede);
+        $hospede = $classHospedeDAO->cadastrarHospede($novoHospede);
+
         if ($hospede >= 1) {
-            header('Location:../index.php?&MSG=Hóspede cadastrado com sucesso!');
+            header("Location:../Visao/Quarto/Cadastrar.php?tipo=$tipo&MSG= Hóspde Cadastrado com Sucesso!!");
         } else {
             header('Location:../index.php?&MSG=Erro ao cadastrar hóspede.');
-        }
+        }           
         break;
 
     case 'alterarHospede':
@@ -39,21 +43,17 @@ switch ($acao) {
         }
         break;
 
-    case 'excluirHospede':
-        if (isset($_GET['idH'])){
-            $idHospede = $_GET['idH'];
-            $classHoespedeDAO = new ClassHospedeDAO();
-            $hs = $classUsuarioDAO->excluirHospede($idHospede);
-            if ($hs == TRUE){
-                header('Location:../index.php?PAGINA=listarHospede&MSG= Hóspede excluído com sucesso!');
-            else{
-                header('Location:../index.php?PAGINA=listarHospede&MSG= Não foi possível excluir o hóspede!');
-                }
-            }
+  case 'excluirHospede':
+    if (isset($_GET['idHospede'])) {
+        $idHospede = $_GET['idHospede'];
+        $classHospedeDAO = new ClassHospedeDAO();
+        $hs = $classHospedeDAO->excluirHospede($idHospede);
+        if ($hs == TRUE) {
+            header('Location:../index.php?PAGINA=listarHospede&MSG=Hóspede excluído com sucesso!');
+        } else {
+            header('Location:../index.php?PAGINA=listarHospede&MSG=Não foi possível excluir o hóspede!');
         }
-        break;
+    }
+    break;
 
-    default:
-        break;
 }
-

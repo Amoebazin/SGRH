@@ -1,3 +1,7 @@
+<?php
+$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,30 @@
     <link rel="stylesheet" href=".\Visao\css\form.css">
 </head>
 <body>
-    <Header>Insira suas credenciais</Header>
+    <h1>Insira suas Crendenciais</h1>
+
+    <form method="post" action="../../Controle/ControleHospede.php?ACAO=cadastrarHospede">
+        
+    <label for="nome">Nome: </label>
+    <input type="text" name="nome" id="nome" required>
+
+    <label for="email">Email: </label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="telefone">Telefone: </label>
+    <input type="tel" name="telefone" id="telefone" required>
+
+    <label for="data_nascimento">Data de nascimento: </label>
+    <input type="date" name="data_nascimento" id="data_nascimento">
+
+    <input type="hidden" name="checkin" value="2024-05-10"> 
+    <input type="hidden" name="checkout" value="2024-05-12">
+    <input type="hidden" name="quarto" value="3">
+
+    <input type="submit" value="Enviar">
+
+    <input type="hidden" name="tipo" value="<?= htmlspecialchars($tipo) ?>">
+</form>
+
 </body>
 </html>

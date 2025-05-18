@@ -5,7 +5,7 @@ class ClassQuarto
     private $numero;
     private $tipo;
     private $preco;
-    private $statusQuarto;
+    private $status;
 
         public function getIdQuarto() {
         return $this->idQuarto;
@@ -39,12 +39,12 @@ class ClassQuarto
         $this->preco = $preco;
     }
 
-    public function getStatusQuarto() {
-        return $this->statusQuarto;
+    public function getStatus() {
+        return $this->status;
     }
 
-    public function setStatus($statusQuarto) {
-        $this->statusQuarto = $statusQuarto;
+    public function setStatus($status) {
+        $this->status = $status;
     }
 }
 

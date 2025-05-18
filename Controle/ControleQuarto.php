@@ -5,11 +5,11 @@ require_once '../Modelo/DAO/ClassQuartoDAO.php';
 
 $acao = $_GET['ACAO'];
 
-$idQuarto = $_POST['idQ'];
-$numero = $_POST['numero'];
-$tipo = $_POST['tipo'];
-$preco = $_POST['preco'];
-$status = $_POST['status'];
+$idQuarto =@$_POST['idQuarto'];
+$numero =@$_POST['numero'];
+$tipo =@$_POST['tipo'];
+$preco =@$_POST['preco'];
+$status =@$_POST['status'];
 
 $novoQuarto = new ClassQuarto();
 $novoQuarto->setNumero($numero);
@@ -17,14 +17,17 @@ $novoQuarto->setTipo($tipo);
 $novoQuarto->setPreco($preco);
 $novoQuarto->setStatus($status);
 
-$classHospedeDAO= new ClassHospedeDAO();
+$classQuartoDAO= new ClassQuartoDAO();
 switch ($acao) {
     case "cadastrarQuarto":
-        $quarto = $classQuartoDAO->cadastrar($novoQuarto);
+        $quarto = $classQuartoDAO->cadastrarQuarto($novoQuarto);
+
+        
+
         if($quarto >= 1){
-            header('Location:../index.php?&MSG = Cadastro do quarto realizado com sucesso!');
+           header("Location:../Visao/Reserva/Cadastrar.php?&MSG= Cadastro realizado com sucesso");
         } else {
-            header('Location:../index.php?&MSG = Não foi possivel realizar o cadastro do quarto!');
+            header('Location:../index.php?&MSG= Não foi possivel realizar o cadastro do quarto!');
         }
 
         break;
@@ -34,12 +37,12 @@ switch ($acao) {
         if($quarto == 1){
             header('Location:../index.php?&MSG= Alteração realizada com sucesso!');
         } else {
-            header('Location:../index.php?$MSG= Não foi possivel realizar a alteração!')
+            header('Location:../index.php?$MSG= Não foi possivel realizar a alteração!');
         }
         
     case "excluirQuarto":
-        if (isset($_GET['idQ'])){
-            $idQuarto = $_GET['idQ'];
+        if (isset($_GET['idQuarto'])){
+            $idQuarto = $_GET['idQuarto'];
             $classQuartoDAO = new ClassHospedeDAO();
             $qt = $classQuartoDAO->excluirQuarto($idQuarto);
             if ($qt == TRUE){

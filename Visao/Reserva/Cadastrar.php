@@ -1,3 +1,19 @@
+
+
+<?php
+
+
+require_once '../../Modelo/DAO/ClassHospedeDAO.php';
+require_once '../../Modelo/DAO/ClassQuartoDAO.php';
+
+$hospedeDAO = new ClassHospedeDAO();
+$quartoDAO = new ClassQuartoDAO();
+
+$hospedes = $hospedeDAO->listarHospede(); // ou outro nome que você tenha dado
+$quartos = $quartoDAO->listarQuarto();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,26 +23,35 @@
     <link rel="stylesheet" href=".\Visao\css\form.css">
 </head>
 <body>
-    <h1>Insira suas Crendenciais</h1>
 
-    <form method="post" action="../../Controle/ControleReserva.php?ACAO=cadastrarReserva">
-    <label for="nome">Nome: </label>
-    <input type="text" name="nome" id="nome" required>
+<h2>Nova Reserva</h2>
 
-    <label for="email">Email: </label>
-    <input type="email" name="email" id="email" required>
+<form action="../../Controle/ControleReserva.php?ACAO=cadastrarReserva" method="POST">
+  
+  <label for="idHospede">Hóspede: </label>
+  <select name="idHospede" required>
+    <option value="">Selecione...</option>
+    <?php foreach ($hospedes as $h): ?>
+      <option value="<?= $h['idHospede'] ?>"><?= $h['nome'] ?> - <?= $h['email'] ?></option>
+      <?php endforeach; ?>
+  </select>
 
-    <label for="telefone">Telefone: </label>
-    <input type="tel" name="telefone" id="telefone" required>
+  <label for="idQuarto">Quarto: </label>
+  <select name="idQuarto">
+    <option value="">Selecione...</option>
+    <?php foreach ($quartos as $q): ?>
+      <option value="<?= $q['idQuarto'] ?>">#<?= $q['numero'] ?> - <?= $q['tipo'] ?> - <?= $q['preco'] ?></option>
+      <?php endforeach; ?>
+  </select>
 
-    <label for="data_nascimento">Data de nascimento: </label>
-    <input type="date" name="data_nascimento" id="data_nascimento">
 
-    <input type="hidden" name="checkin" value="2024-05-10"> 
-    <input type="hidden" name="checkout" value="2024-05-12">
-    <input type="hidden" name="quarto_id" value="3">
+  <label>Check-in:</label>
+  <input type="date" name="checkin" required>
 
-    <input type="submit" value="Enviar">
+  <label>Check-out:</label>
+  <input type="date" name="checkout" required>
+
+  <button type="submit">Confirmar Reserva</button>
 </form>
 
 </body>

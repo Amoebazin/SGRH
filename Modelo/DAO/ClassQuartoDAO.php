@@ -14,7 +14,7 @@ class ClassQuartoDAO {
             $stmt->bindValue(3, $quarto->getPreco());
             $stmt->bindValue(4, $quarto->getStatus());
             $stmt->execute();
-            return true;
+            return $pdo->lastInsertId();
         } catch (PDOException $exc) {
             echo $exc->getMessage();
         }

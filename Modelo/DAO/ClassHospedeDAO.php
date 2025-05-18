@@ -8,15 +8,22 @@ class ClassHospedeDAO {
     public function cadastrarHospede(ClassHospede $hospede) {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "INSERT INTO hospede (nome, email, telefone) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO hospede (nome, email, telefone, data_nascimento) VALUES (?, ?, ?,?)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(1, $hospede->getNome());
             $stmt->bindValue(2, $hospede->getEmail());
             $stmt->bindValue(3, $hospede->getTelefone());
+            $stmt->bindValue(4, $hospede->getDataNascimento());
             $stmt->execute();
-            return true;
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
+
+            $idHospede = $pdo->lastInsertId();
+            var_dump("Inserindo ID: " . $idHospede);
+            return $idHospede;
+
+         } catch (PDOException $exc) {
+        echo "Erro: " . $exc->getMessage();
+        exit;
+
         }
     }
 

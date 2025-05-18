@@ -30,7 +30,7 @@
                 <h3>Solteiro</h3>
                 <p>Service Description. You can show/hide the title, 
                    subtitle, text, button in the Block Parameters.</p>
-                <a href="./Visao/Reserva/Cadastrar.php?tipo=Solteiro">
+                <a href="./Visao/Hospede/Cadastrar.php?tipo=Solteiro">
                 <button class="learn-btn">Reservar</button>
                 </a>
             </div>
@@ -40,7 +40,7 @@
                 <h3>Casal</h3>
                 <p>Service Description. You can show/hide the title,
                    subtitle, text, button in the Block Parameters.</p>
-                <a href="./Visao/Reserva/Cadastrar.php?tipo=Casal">
+                <a href="./Visao/Hospede/Cadastrar.php?tipo=Casal">
                 <button class="learn-btn">Reservar</button>
                 </a>
             </div>
@@ -50,7 +50,7 @@
                 <h3>Suíte</h3>
                 <p>Service Description. You can show/hide the title, 
                    subtitle, text, button in the Block Parameters.</p>
-                <a href="./Visao/Reserva/Cadastrar.php?tipo=Suite">
+                <a href="./Visao/Hospede/Cadastrar.php?tipo=Suite">
                 <button class="learn-btn">Reservar</button>
                 </a>
             </div>
