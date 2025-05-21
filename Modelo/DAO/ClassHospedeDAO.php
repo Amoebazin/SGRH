@@ -64,5 +64,17 @@ class ClassHospedeDAO {
             echo $exc->getMessage();
         }
     }
+
+    public function buscarUltimoHospede() {
+    try {
+        $pdo = Conexao::getInstance();
+        $sql = "SELECT * FROM hospede ORDER BY idHospede DESC LIMIT 1";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erro ao buscar último hóspede: " . $e->getMessage();
+        return null;
+    }
+}
 }
 ?>

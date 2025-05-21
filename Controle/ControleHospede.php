@@ -1,5 +1,4 @@
 <?php
-var_dump($_GET);
 
 require_once '../Modelo/ClassHospede.php';
 require_once '../Modelo/DAO/ClassHospedeDAO.php';

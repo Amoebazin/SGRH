@@ -1,5 +1,9 @@
 <?php
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+require_once '../../Modelo/DAO/ClassHospedeDAO.php';
+
+$hospedeDAO = new ClassHospedeDAO(); // Instanciando corretamente
+$ultimoHospede = $hospedeDAO->buscarUltimoHospede(); // Pegando o último hóspede
 ?>
 
 <!DOCTYPE html>

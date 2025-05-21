@@ -57,5 +57,43 @@ class ClassQuartoDAO {
             echo $exc->getMessage();
         }
     }
+
+    public function buscarUltimoQuarto() {
+    try {
+        $pdo = Conexao::getInstance();
+        $sql = "SELECT * FROM quarto ORDER BY idQuarto DESC LIMIT 1";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erro ao buscar último quarto: " . $e->getMessage();
+        return null;
+    }
+    }
+
+    public function atualizarStatusQuarto($idQuarto, $novoStatus) {
+    try {
+        $pdo = Conexao::getInstance();
+        $stmt = $pdo->prepare("UPDATE quarto SET status = ? WHERE idQuarto = ?");
+        $stmt->bindValue(1, $novoStatus);
+        $stmt->bindValue(2, $idQuarto);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erro ao atualizar status do quarto: " . $e->getMessage();
+        return false;
+    }
+    }
+
+    public function listarTodosQuartos() {
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "SELECT idQuarto, numero, status, preco FROM quarto";
+            $stmt = $pdo->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao listar quartos: " . $e->getMessage();
+            return [];
+        }
+    }
+
 }
 ?>

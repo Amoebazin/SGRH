@@ -9,8 +9,13 @@ require_once '../../Modelo/DAO/ClassQuartoDAO.php';
 $hospedeDAO = new ClassHospedeDAO();
 $quartoDAO = new ClassQuartoDAO();
 
+$quartoDAO = new ClassQuartoDAO(); // Instanciando a classe corretamente
+$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); // Chamando o método
+
 $hospedes = $hospedeDAO->listarHospede(); // ou outro nome que você tenha dado
-$quartos = $quartoDAO->listarQuarto();
+$quartos = $quartoDAO->listarTodos();
+$ultimoHospede = $hospedeDAO->buscarUltimoHospede(); 
+$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); 
 ?>
 
 
@@ -28,28 +33,23 @@ $quartos = $quartoDAO->listarQuarto();
 
 <form action="../../Controle/ControleReserva.php?ACAO=cadastrarReserva" method="POST">
   
-  <label for="idHospede">Hóspede: </label>
-  <select name="idHospede" required>
-    <option value="">Selecione...</option>
-    <?php foreach ($hospedes as $h): ?>
-      <option value="<?= $h['idHospede'] ?>"><?= $h['nome'] ?> - <?= $h['email'] ?></option>
-      <?php endforeach; ?>
-  </select>
+ <label for="idHospede">Hóspede:</label>
+  <input type="hidden" name="idHospede" value="<?= $ultimoHospede['idHospede'] ?>">
+  <input type="text" name="nomeHospede" value="<?= $ultimoHospede['nome'] ?>" readonly>
+  <input type="text" name="emailHospede" value="<?= $ultimoHospede['email'] ?>" readonly>
 
-  <label for="idQuarto">Quarto: </label>
-  <select name="idQuarto">
-    <option value="">Selecione...</option>
-    <?php foreach ($quartos as $q): ?>
-      <option value="<?= $q['idQuarto'] ?>">#<?= $q['numero'] ?> - <?= $q['tipo'] ?> - <?= $q['preco'] ?></option>
-      <?php endforeach; ?>
-  </select>
+  <label for="idQuarto">Quarto:</label>
+  <input type="hidden" name="idQuarto" value="<?= $ultimoQuarto['idQuarto'] ?>">
+  <input type="text" name="numeroQuarto" value="<?= $ultimoQuarto['numero'] ?>" readonly>
+  <input type="text" name="tipoQuarto" value="<?= $ultimoQuarto['tipo'] ?>" readonly>
+  <input type="text" name="precoQuarto" value="<?= $ultimoQuarto['preco'] ?>" readonly>
 
 
   <label>Check-in:</label>
-  <input type="date" name="checkin" required>
+  <input type="datetime-local" name="checkin" required>
 
   <label>Check-out:</label>
-  <input type="date" name="checkout" required>
+  <input type="datetime-local" name="checkout" required>
 
   <button type="submit">Confirmar Reserva</button>
 </form>

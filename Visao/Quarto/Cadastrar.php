@@ -1,9 +1,9 @@
-
-
-
 <?php
-$tipoQuarto = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+require_once '../../Modelo/DAO/ClassQuartoDAO.php';
 
+$tipoQuarto = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+$quartoDAO = new ClassQuartoDAO(); // Instanciando corretamente
+$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); // Pegando o último quarto
 
 switch ($tipoQuarto) {
     case 'Solteiro':
@@ -31,32 +31,7 @@ switch ($tipoQuarto) {
     <meta charset="UTF-8">
     <title>Cadastrar Quarto</title>
     <style>
-        form {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            font-family: Arial, sans-serif;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px;
-            background: #4CAF50;
-            border: none;
-            color: white;
-            width: 100%;
-            cursor: pointer;
-        }
+      
     </style>
 </head>
 <body>
@@ -86,5 +61,18 @@ switch ($tipoQuarto) {
     <button type="submit">Cadastrar Quarto</button>
 </form>
 
+<script>
+function atualizarStatus() {
+    var selectQuarto = document.getElementById("numero");
+    var statusInput = document.getElementById("status");
+    var precoInput = document.getElementById("preco");
+
+    var statusSelecionado = selectQuarto.options[selectQuarto.selectedIndex].getAttribute("data-status");
+    var precoSelecionado = selectQuarto.options[selectQuarto.selectedIndex].getAttribute("data-preco");
+
+    statusInput.value = statusSelecionado;
+    precoInput.value = precoSelecionado;
+}
+</script>
 </body>
 </html>

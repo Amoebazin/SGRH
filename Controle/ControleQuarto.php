@@ -21,9 +21,6 @@ $classQuartoDAO= new ClassQuartoDAO();
 switch ($acao) {
     case "cadastrarQuarto":
         $quarto = $classQuartoDAO->cadastrarQuarto($novoQuarto);
-
-        
-
         if($quarto >= 1){
            header("Location:../Visao/Reserva/Cadastrar.php?&MSG= Cadastro realizado com sucesso");
         } else {

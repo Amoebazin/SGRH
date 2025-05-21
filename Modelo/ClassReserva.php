@@ -1,13 +1,11 @@
 
 <?php
-class Reserva {
+class ClassReserva {
     private $idReserva;
     private $idHospede;
     private $idQuarto;
     private $checkin;
     private $checkout;
-    private $statusReserva;
-
 
     public function getIdReserva() {
         return $this->idReserva;
@@ -47,13 +45,5 @@ class Reserva {
 
     public function setCheckout($checkout) {
         $this->checkout = $checkout;
-    }
-
-    public function getStatusReserva() {
-        return $this->statusReserva;
-    }
-
-    public function setStatus($statusReserva) {
-        $this->statusReserva = $statusReserva;
     }
 }
