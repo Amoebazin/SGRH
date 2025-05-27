@@ -69,41 +69,25 @@ class ClassHospedeDAO {
         }
     }
 
-    public function alterarReserva(ClassReserva $alterarReserva)
-{
-    try {
-        $pdo = Conexao::getInstance();
-        $sql = "UPDATE reserva 
-                    SET checkin = ?, checkout = ? 
-                  WHERE idReserva = ?";
-        $stmt = $pdo->prepare($sql);
-
-        // Formata data/hora
-        $checkin  = str_replace("T", " ", $alterarReserva->getCheckin()) . ":00";
-        $checkout = str_replace("T", " ", $alterarReserva->getCheckout()) . ":00";
-
-        // Faz o bind
-        $stmt->bindValue(1, $checkin);
-        $stmt->bindValue(2, $checkout);
-        $stmt->bindValue(3, $alterarReserva->getIdReserva());
-
-        // DEBUG: veja o SQL e os valores
-        echo "<pre>";
-        echo "SQL: $sql\n";
-        echo "Parâmetros:\n";
-        var_dump($checkin, $checkout, $alterarReserva->getIdReserva());
-        // Execute e veja o resultado
-        $ok = $stmt->execute();
-        var_dump($ok, $stmt->rowCount());
-        echo "</pre>";
-        exit;
-
-        // return $stmt->rowCount();
-    } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        return false;
+    public function alterarHospede(ClassHospede $alterarHospede)
+    {
+        try {
+            $pdo = Conexao::getInstance();
+            $sql = "UPDATE hospede SET nome=?,
+                    email=?, telefone=?, data_nascimento=?
+                    WHERE idHospede=? ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(1, $alterarHospede->getNome());
+            $stmt->bindValue(2, $alterarHospede->getEmail());
+            $stmt->bindValue(3, $alterarHospede->getTelefone());
+            $stmt->bindValue(4, $alterarHospede->getDataNascimento());
+            $stmt->bindValue(5, $alterarHospede->getIdHospede());
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
     }
-}
 
     public function excluirHospede($idHospede) {
         try {
