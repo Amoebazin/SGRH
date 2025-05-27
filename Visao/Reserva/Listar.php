@@ -15,6 +15,10 @@ $reservas = $classReservaDAO->listarTodasComDetalhes();
 
 <h2>Reservas Cadastradas</h2>
 
+<?php if (isset($_GET['MSG'])): ?>
+    <p><?= htmlspecialchars($_GET['MSG']) ?></p>
+<?php endif; ?>
+
 <table border="1">
     <tr>
         <th>ID Reserva</th>
@@ -25,6 +29,7 @@ $reservas = $classReservaDAO->listarTodasComDetalhes();
         <th>Check-in</th>
         <th>Check-out</th>
         <th>Preço Total</th>
+        <th>Ações</th>
     </tr>
     <?php foreach ($reservas as $reserva): ?>
     <tr>
@@ -36,18 +41,16 @@ $reservas = $classReservaDAO->listarTodasComDetalhes();
         <td><?= $reserva['checkin'] ?></td>
         <td><?= $reserva['checkout'] ?></td>
         <td>R$ <?= number_format($reserva['preco'], 2, ',', '.') ?></td>
+        <td>
+            <a href="Alterar.php?ACAO=alterarReserva&idReserva=<?= $reserva['idReserva'] ?>">Alterar</a> |
+            <a href="../../Controle/ControleReserva.php?ACAO=excluirReserva&idReserva=<?= $reserva['idReserva'] ?>"
+               onclick="return confirm('Tem certeza que deseja excluir esta reserva?')">Excluir</a>
+        </td>
     </tr>
     <?php endforeach; ?>
-
-    <td>
-    <a href="Alterar.php?idReserva=<?= $reserva['idReserva'] ?>">Editar</a> |
-    <a href="../../Controle/ControleReserva.php?ACAO=excluirReserva&idex=<?= $reserva['idReserva'] ?>"
-       onclick="return confirm('Tem certeza que deseja excluir esta reserva?')">Excluir</a>
-    <a href="../../index.php">Voltar
-    </a>
-</td>
-
 </table>
+
+<p><a href="../../index.php">Voltar</a></p>
 
 </body>
 </html>

@@ -2,8 +2,8 @@
 require_once '../../Modelo/DAO/ClassQuartoDAO.php';
 
 $tipoQuarto = isset($_GET['tipo']) ? $_GET['tipo'] : '';
-$quartoDAO = new ClassQuartoDAO(); // Instanciando corretamente
-$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); // Pegando o último quarto
+$quartoDAO = new ClassQuartoDAO(); 
+$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); 
 
 switch ($tipoQuarto) {
     case 'Solteiro':
@@ -61,18 +61,5 @@ switch ($tipoQuarto) {
     <button type="submit">Cadastrar Quarto</button>
 </form>
 
-<script>
-function atualizarStatus() {
-    var selectQuarto = document.getElementById("numero");
-    var statusInput = document.getElementById("status");
-    var precoInput = document.getElementById("preco");
-
-    var statusSelecionado = selectQuarto.options[selectQuarto.selectedIndex].getAttribute("data-status");
-    var precoSelecionado = selectQuarto.options[selectQuarto.selectedIndex].getAttribute("data-preco");
-
-    statusInput.value = statusSelecionado;
-    precoInput.value = precoSelecionado;
-}
-</script>
 </body>
 </html>

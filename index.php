@@ -11,11 +11,10 @@
     <header>
         <nav class="navbar">
             <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contacts</a></li>
+                <li><a href="Visao/Hospede/Listar.php">Hospedes</a></li>
+                <li><a href="Visao/Quarto/Listar.php">Quartos</a></li>
+                <li><a href="Visao/Reserva/Listar.php">Reservas</a></li>
             </ul>
-            <button class="start-btn">Start Now</button>
         </nav>
     </header>
 

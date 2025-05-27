@@ -34,25 +34,78 @@ class ClassHospedeDAO {
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':idHospede', $idHospede);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $dadosH = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($dadosH) {
+                $hospede = new ClassHospede();
+                $hospede->setIdHospede($dadosH['idHospede']);
+                $hospede->setNome($dadosH['nome']);
+                $hospede->setEmail($dadosH['email']);
+                $hospede->setTelefone($dadosH['telefone']);
+                $hospede->setDataNascimento($dadosH['data_nascimento']);
+                return $hospede;
+            }
+
+            return null;
+            
         } catch (PDOException $ex) {
-            return $ex->getMessage();
+            echo $ex->getMessage();
+            return null;
         }
     }
 
-    public function listarHospede() {
+    public function listarTodosHospedes() {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT * FROM hospede ORDER BY nome";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
+            $sql = "SELECT idHospede, nome,
+                    email, telefone, data_nascimento
+                    FROM hospede";
+            $stmt = $pdo->query($sql);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
+        } catch (PDOException $e) {
+            echo "Erro ao listar quartos: " . $e->getMessage();
+            return [];
         }
     }
 
-    public function excluir($idHospede) {
+    public function alterarReserva(ClassReserva $alterarReserva)
+{
+    try {
+        $pdo = Conexao::getInstance();
+        $sql = "UPDATE reserva 
+                    SET checkin = ?, checkout = ? 
+                  WHERE idReserva = ?";
+        $stmt = $pdo->prepare($sql);
+
+        // Formata data/hora
+        $checkin  = str_replace("T", " ", $alterarReserva->getCheckin()) . ":00";
+        $checkout = str_replace("T", " ", $alterarReserva->getCheckout()) . ":00";
+
+        // Faz o bind
+        $stmt->bindValue(1, $checkin);
+        $stmt->bindValue(2, $checkout);
+        $stmt->bindValue(3, $alterarReserva->getIdReserva());
+
+        // DEBUG: veja o SQL e os valores
+        echo "<pre>";
+        echo "SQL: $sql\n";
+        echo "Parâmetros:\n";
+        var_dump($checkin, $checkout, $alterarReserva->getIdReserva());
+        // Execute e veja o resultado
+        $ok = $stmt->execute();
+        var_dump($ok, $stmt->rowCount());
+        echo "</pre>";
+        exit;
+
+        // return $stmt->rowCount();
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+        return false;
+    }
+}
+
+    public function excluirHospede($idHospede) {
         try {
             $pdo = Conexao::getInstance();
             $sql = "DELETE FROM hospede WHERE idHospede =:idHospede";

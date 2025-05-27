@@ -9,11 +9,11 @@ require_once '../../Modelo/DAO/ClassQuartoDAO.php';
 $hospedeDAO = new ClassHospedeDAO();
 $quartoDAO = new ClassQuartoDAO();
 
-$quartoDAO = new ClassQuartoDAO(); // Instanciando a classe corretamente
-$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); // Chamando o método
+$quartoDAO = new ClassQuartoDAO(); 
+$ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); 
 
-$hospedes = $hospedeDAO->listarHospede(); // ou outro nome que você tenha dado
-$quartos = $quartoDAO->listarTodos();
+$hospedes = $hospedeDAO->listarTodosHospedes();
+$quartos = $quartoDAO->listarTodosQuartos();
 $ultimoHospede = $hospedeDAO->buscarUltimoHospede(); 
 $ultimoQuarto = $quartoDAO->buscarUltimoQuarto(); 
 ?>

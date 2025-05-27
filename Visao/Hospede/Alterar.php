@@ -1,20 +1,36 @@
-<?php
-require_once '../../Modelo/ClassHospede.php';
-require_once '../../Modelo/DAO/ClassHospedeDAO.php';
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+         <title></title>
+    </head>
+    <body>
+        
+            <h1>Atualização de Hóspedes</h1>
+            <hr>
+        </div>
+		
+        <?php
+            require_once __DIR__ . '/../../Modelo/ClassHospede.php';
+            require_once __DIR__ . '/../../Modelo/DAO/ClassHospedeDAO.php';
+			$idHospede =@$_GET['idHospede'];
+            $novoHospede = new ClassHospede();
+            $hospedeDAO = new ClassHospedeDAO();
+            $novoHospede = $hospedeDAO->buscarHospede($idHospede);
 
-if (isset($_GET['idHospede'])) {
-    $id = $_GET['idHospede'];
-    $dao = new ClassHospedeDAO();
-    $hospede = $dao->buscarHospede($id);
-}
-?>
-
-<h2>Alterar Hóspede</h2>
-<form action="../../Controle/ControleHospede.php?ACAO=alterarHospede" method="post">
-    <input type="hidden" name="idHospede" value="<?php echo $hospede->getIdHospede(); ?>">
-    Nome: <input type="text" name="nome" value="<?php echo $hospede->getNome(); ?>"><br>
-    Email: <input type="email" name="email" value="<?php echo $hospede->getEmail(); ?>">
-    Telefone: <input type="text" name="telefone" value="<?php echo $hospede->getTelefone(); ?>"><br>
-    Data de Nascimento: <input type="date" name="data_nascimrnto" value="<?php echo $hospede->getDataNascimento(); ?>">
-    <input type="submit" value="Salvar Alterações">
-</form>
+        ?>
+        <form method="post" action="../../Controle/ControleHospede.php?ACAO=alterarHospede" >
+                <input type="hidden" name="idHospede" value="<?php echo $novoHospede->getIdHospede(); ?>">
+                Nome:<input type="text" name="nome" size="50" value="<?php echo $novoHospede->getNome(); ?>" /><br>
+                Email:<input type="email" id="email" name="email" size="40" value="<?php echo $novoHospede->getEmail(); ?>"/>
+                Telefone:<input type="telefone" id="telefone" name="telefone" size="40" value="<?php echo $novoHospede->getTelefone(); ?>"/>
+                Data_Nascimento:<input type="date" id="data_nascimento" name="data_nascimento" size="40" value="<?php echo $novoHospede->getDataNascimento(); ?>"/>
+                <br>
+				<button type="submit" value="Alterar">Alterar</button> 
+				<button 
+                type="reset" value="Limpar">Limpar</button>
+            </div>
+        </form>
+    </body>
+</html>

@@ -36,23 +36,24 @@ switch ($acao) {
     case 'alterarHospede':
         $hospede = $classHospedeDAO->alterarHospede($novoHospede);
         if($hospede == 1){
-            header('Location:../index.php?&MSG= Cadastro atualizado com sucesso!');
+            header('Location:../Visao/Reserva/Listar.php?&MSG= Cadastro atualizado com sucesso!');
         } else {
             header('Location:../index.php?&MSG= Não possível realizar a atualização!');
         }
         break;
 
-  case 'excluirHospede':
-    if (isset($_GET['idHospede'])) {
-        $idHospede = $_GET['idHospede'];
-        $classHospedeDAO = new ClassHospedeDAO();
-        $hs = $classHospedeDAO->excluirHospede($idHospede);
-        if ($hs == TRUE) {
-            header('Location:../index.php?PAGINA=listarHospede&MSG=Hóspede excluído com sucesso!');
-        } else {
-            header('Location:../index.php?PAGINA=listarHospede&MSG=Não foi possível excluir o hóspede!');
-        }
-    }
-    break;
+        case "excluirHospede":
+            if (isset($_GET['idHospede'])) {
+                $idHospede = $_GET['idHospede'];
+                //var_dump($idQuarto);
+                $excluirH = $classHospedeDAO->excluirHospede($idHospede);
+                //var_dump($excluirQ); // DEBUG
+                //exit;
+                header('Location:../Visao/Hospede/Listar.php?MSG= ' . 
+                ($excluirH ? 'Hospede excluido com sucesso!'
+                     : 'Erro ao excluir reserva'));
+                exit;
+            }
+            break; 
 
 }

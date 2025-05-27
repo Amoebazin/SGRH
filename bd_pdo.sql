@@ -6,7 +6,7 @@ idHospede int auto_increment primary key,
 nome varchar(100) not null,
 email varchar(100),
 telefone varchar(20),
-data_nascimento DATE);
+data_nascimento DATETIME);
 
 create table quarto(
 idQuarto int auto_increment primary key,
@@ -20,7 +20,7 @@ create table reserva(
 idReserva int auto_increment primary key,
 id_hospede int,
 id_quarto int,
-checkin date,
-checkout date,
+checkin datetime,
+checkout datetime,
 foreign key (id_hospede) references hospede(idHospede),
 foreign key (id_quarto) references quarto(idQuarto));

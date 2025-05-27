@@ -1,21 +1,50 @@
 <?php
 require_once '../../Modelo/DAO/ClassHospedeDAO.php';
 
-$dao = new ClassHospedeDAO();
-$hospedes = $dao->listarHospedes();
+$classHospedeDAO = new ClassHospedeDAO();
+$hospedes = $classHospedeDAO->listarTodosHospedes();
+?>
 
-echo "<h2>Lista de Hóspedes</h2>";
-echo "<table border='1'>";
-echo "<tr><th>Nome</th><th>Telefone</th><th>Ações</th></tr>";
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Hóspedes</title>
+</head>
+<body>
 
-foreach ($hospedes as $h) {
-    echo "<tr>";
-    echo "<td>" . $h['nome'] . "</td>";
-    echo "<td>" . $h['telefone'] . "</td>";
-    echo "<td>
-        <a href='../../Controle/ControleHospede.php?ACAO=excluirHospede&idHospede=" . $h['idHospede'] . "' onclick='return confirm(\"Deseja excluir?\")'>Excluir</a> |
-        <a href='Hospede/Alterar.php?idHospede=" . $h['idHospede'] . "'>Alterar</a>
-    </td>";
-    echo "</tr>";
-}
-echo "</table>";
+<h2>Hospedes Cadastrados</h2>
+
+<?php if (isset($_GET['MSG'])): ?>
+    <p><?= htmlspecialchars($_GET['MSG']) ?></p>
+<?php endif; ?>
+
+<table border="1">
+    <tr>
+        <th>ID Hospede</th>
+        <th>Hóspede</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Data_Nascimento</th>
+        <th>Ações</th>
+    </tr>
+    <?php foreach ($hospedes as $hospede): ?>
+    <tr>
+        <td><?= $hospede['idHospede'] ?></td>
+        <td><?= $hospede['nome'] ?></td>
+        <td><?= $hospede['email'] ?></td>
+        <td><?= $hospede['telefone'] ?></td>
+        <td><?= $hospede['data_nascimento'] ?></td>
+        <td>
+            <a href="Alterar.php?ACAO=alterarHospede&idHospede=<?= $hospede['idHospede'] ?>">Alterar</a> |
+            <a href="../../Controle/ControleHospede.php?ACAO=excluirHospede&idHospede=<?= $hospede['idHospede'] ?>"
+               onclick="return confirm('Tem certeza que deseja excluir este Hóspede?')">Excluir</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+<p><a href="../../index.php">Voltar</a></p>
+
+</body>
+</html>
