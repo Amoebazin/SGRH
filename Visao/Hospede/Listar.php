@@ -10,6 +10,7 @@ $hospedes = $classHospedeDAO->listarTodosHospedes();
 <head>
     <meta charset="UTF-8">
     <title>Lista de Hóspedes</title>
+    <link rel="stylesheet" href="..\css\listarHospede.css">
 </head>
 <body>
 
@@ -36,7 +37,7 @@ $hospedes = $classHospedeDAO->listarTodosHospedes();
         <td><?= $hospede['telefone'] ?></td>
         <td><?= $hospede['data_nascimento'] ?></td>
         <td>
-            <a href="Alterar.php?ACAO=alterarHospede&idHospede=<?= $hospede['idHospede'] ?>">Alterar</a> |
+            <a href="Alterar.php?ACAO=alterarHospede&idHospede=<?= $hospede['idHospede'] ?>">Alterar</a> 
             <a href="../../Controle/ControleHospede.php?ACAO=excluirHospede&idHospede=<?= $hospede['idHospede'] ?>"
                onclick="return confirm('Tem certeza que deseja excluir este Hóspede?')">Excluir</a>
         </td>

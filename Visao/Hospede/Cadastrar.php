@@ -12,7 +12,7 @@ $ultimoHospede = $hospedeDAO->buscarUltimoHospede();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href=".\Visao\css\form.css">
+    <link rel="stylesheet" href="..\css\cadFormHospede.css">
 </head>
 <body>
     <h1>Insira suas Crendenciais</h1>

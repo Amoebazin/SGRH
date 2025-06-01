@@ -10,6 +10,7 @@ $quartos = $classQuartoDAO->listarTodosQuartos();
 <head>
     <meta charset="UTF-8">
     <title>Lista de Quartos</title>
+    <link rel="stylesheet" href="..\css\listarQuarto.css">
 </head>
 <body>
 
@@ -34,7 +35,7 @@ $quartos = $classQuartoDAO->listarTodosQuartos();
         <td><?= $quarto['tipo'] ?></td>
         <td>R$ <?= number_format($quarto['preco'], 2, ',', '.') ?></td>
         <td>
-            <a href="Alterar.php?ACAO=alterarQuarto&idQuarto=<?= $quarto['idQuarto'] ?>">Alterar</a> |
+            <a href="Alterar.php?ACAO=alterarQuarto&idQuarto=<?= $quarto['idQuarto'] ?>">Alterar</a> 
             <a href="../../Controle/ControleQuarto.php?ACAO=excluirQuarto&idQuarto=<?= $quarto['idQuarto'] ?>"
                onclick="return confirm('Tem certeza que deseja excluir este quarto?')">Excluir</a>
         </td>

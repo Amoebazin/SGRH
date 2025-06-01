@@ -10,6 +10,7 @@ $reservas = $classReservaDAO->listarTodasComDetalhes();
 <head>
     <meta charset="UTF-8">
     <title>Lista de Reservas</title>
+    <link rel="stylesheet" href="..\css\listarReserva.css">
 </head>
 <body>
 
@@ -42,7 +43,7 @@ $reservas = $classReservaDAO->listarTodasComDetalhes();
         <td><?= $reserva['checkout'] ?></td>
         <td>R$ <?= number_format($reserva['preco'], 2, ',', '.') ?></td>
         <td>
-            <a href="Alterar.php?ACAO=alterarReserva&idReserva=<?= $reserva['idReserva'] ?>">Alterar</a> |
+            <a href="Alterar.php?ACAO=alterarReserva&idReserva=<?= $reserva['idReserva'] ?>">Alterar</a> 
             <a href="../../Controle/ControleReserva.php?ACAO=excluirReserva&idReserva=<?= $reserva['idReserva'] ?>"
                onclick="return confirm('Tem certeza que deseja excluir esta reserva?')">Excluir</a>
         </td>

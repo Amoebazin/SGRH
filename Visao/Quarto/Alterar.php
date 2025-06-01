@@ -4,11 +4,12 @@
         
         <meta charset="UTF-8">
          <title></title>
+         <link rel="stylesheet" href="..\css\alterarQuarto.css">
     </head>
     <body>
         
             <h1>Atualização dos Quartos</h1>
-            <hr>
+
         </div>
 		
         <?php
@@ -28,7 +29,7 @@
                 <br>
 				<button type="submit" value="Alterar">Alterar</button> 
 				<button 
-                type="reset" value="Limpar">Limpar</button>
+                type="reset" value="Limpar">Resetar</button>
             </div>
         </form>
     </body>
