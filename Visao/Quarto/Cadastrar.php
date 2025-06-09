@@ -35,6 +35,7 @@ switch ($tipoQuarto) {
 </head>
 <body>
 
+<h2>Novo Quarto</h2>
 <form action="../../Controle/ControleQuarto.php?ACAO=cadastrarQuarto" method="POST">
     <input type="hidden" name="acao" value="cadastrarQuarto">
   <input type="hidden" name="tipo" value="<?php echo htmlspecialchars($_GET['tipo']); ?>">
@@ -49,13 +50,6 @@ switch ($tipoQuarto) {
 
     <label for="preco">Preço (R$):</label>
     <input type="number" name="preco" id="preco" step="0.01" value="<?= $preco ?>" readonly>
-
-    <label for="status">Status:</label>
-    <select name="status" id="status" required>
-        <option value="Disponível">Disponível</option>
-        <option value="Indisponível">Indisponível</option>
-        <option value="Manutenção">Manutenção</option>
-    </select>
 
     <button type="submit">Cadastrar Quarto</button>
 </form>

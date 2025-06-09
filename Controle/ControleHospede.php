@@ -45,10 +45,8 @@ switch ($acao) {
         case "excluirHospede":
             if (isset($_GET['idHospede'])) {
                 $idHospede = $_GET['idHospede'];
-                //var_dump($idQuarto);
                 $excluirH = $classHospedeDAO->excluirHospede($idHospede);
-                //var_dump($excluirQ); // DEBUG
-                //exit;
+
                 header('Location:../Visao/Hospede/Listar.php?MSG= ' . 
                 ($excluirH ? 'Hospede excluido com sucesso!'
                      : 'Erro ao excluir reserva'));

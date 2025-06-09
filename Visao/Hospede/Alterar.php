@@ -28,7 +28,7 @@
                 Telefone:<input type="telefone" id="telefone" name="telefone" size="40" value="<?php echo $novoHospede->getTelefone(); ?>"/>
                 Data_Nascimento:<input type="date" id="data_nascimento" name="data_nascimento" size="40" value="<?php echo $novoHospede->getDataNascimento(); ?>"/>
                 <br>
-				<button type="submit" value="Alterar">Resetar</button> 
+				<button type="submit" value="Alterar">Alterar</button> 
 				<button 
                 type="reset" value="Limpar">Limpar</button>
             </div>

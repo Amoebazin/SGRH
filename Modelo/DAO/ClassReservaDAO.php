@@ -22,7 +22,7 @@ class ClassReservaDAO {
         echo "Erro ao cadastrar reserva: " . $e->getMessage();
         return false;
     }
-}
+    }
 
     public function alterarReserva(ClassReserva $alterarReserva)
     {
@@ -109,11 +109,11 @@ class ClassReservaDAO {
     public function buscarUltimaReserva() {
         try {
             $pdo = Conexao::getInstance();
-            $sql = "SELECT * FROM hospede ORDER BY idHospede DESC LIMIT 1";
+            $sql = "SELECT * FROM reserva ORDER BY idReserva DESC LIMIT 1";
             $stmt = $pdo->query($sql);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Erro ao buscar último hóspede: " . $e->getMessage();
+            echo "Erro ao buscar última reserva: " . $e->getMessage();
             return null;
         }
     }
@@ -129,4 +129,5 @@ class ClassReservaDAO {
             return false;
         }
     }
+
 }

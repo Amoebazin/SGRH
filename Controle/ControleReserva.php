@@ -10,14 +10,12 @@ $checkin = @$_POST['checkin'];
 $checkout = @$_POST['checkout'];
 $acao = isset($_GET['ACAO']) ? $_GET['ACAO'] : null;
 
-
 $novaReserva = new ClassReserva();
 $novaReserva->setIdReserva($idReserva);
 $novaReserva->setIdHospede($idHospede);
 $novaReserva->setIdQuarto($idQuarto);
 $novaReserva->setCheckin($checkin);
 $novaReserva->setCheckout($checkout);
-
 
 $classReservaDAO = new ClassReservaDAO();
 
@@ -26,13 +24,14 @@ switch ($acao) {
             $reserva = $classReservaDAO->cadastrarReserva($novaReserva);
             if ($reserva >= 1) {
                 $classQuartoDAO = new ClassQuartoDAO();
-               header('Location: ../Visao/Reserva/Listar.php?MSG=Reserva cadastrada com sucesso!');
-               exit;
+                header('Location: ../Visao/Reserva/Listar.php?MSG=Reserva cadastrada com sucesso!');
+                exit;
             } else {
-                header('Location:../index.php?&MSG=Não foi possível realizar o cadastro!');
+                header('Location: ../Visao/Reserva/Cadastrar.php?MSG=Quarto indisponível neste período!');
+                exit;
             }
-        break;
-
+            
+        break;    
 
    case "alterarReserva":
     // 1) Criar o objeto
@@ -64,7 +63,6 @@ switch ($acao) {
     exit;
     break;
 
-
     case "excluirReserva":
         if (isset($_GET['idReserva'])) {
             $idReserva = $_GET['idReserva'];
@@ -76,5 +74,4 @@ switch ($acao) {
         }
         break;        
 
-                
 }

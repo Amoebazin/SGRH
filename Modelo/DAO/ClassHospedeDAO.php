@@ -17,7 +17,6 @@ class ClassHospedeDAO {
             $stmt->execute();
 
             $idHospede = $pdo->lastInsertId();
-            var_dump("Inserindo ID: " . $idHospede);
             return $idHospede;
 
          } catch (PDOException $exc) {

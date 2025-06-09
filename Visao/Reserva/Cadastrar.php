@@ -30,7 +30,6 @@ $ultimoQuarto = $quartoDAO->buscarUltimoQuarto();
 <body>
 
 <h2>Nova Reserva</h2>
-
 <form action="../../Controle/ControleReserva.php?ACAO=cadastrarReserva" method="POST">
   
  <label for="idHospede">Hóspede:</label>
@@ -52,6 +51,7 @@ $ultimoQuarto = $quartoDAO->buscarUltimoQuarto();
   <input type="datetime-local" name="checkout" required>
 
   <button type="submit">Confirmar Reserva</button>
+
 </form>
 
 </body>
